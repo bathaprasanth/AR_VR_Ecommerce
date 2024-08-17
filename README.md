@@ -1,7 +1,7 @@
-# Virtual_Ecommerce_Design
+# AR_VR_Ecommerce
 The project enhances mall shopping by integrating AR technology, enabling shoppers to virtually try on clothing and accessories in real-time with accurate size and fit simulations. It creates an interactive, immersive experience, eliminating the need for physical trials and making shopping more convenient and engaging.
 
-### Functional Requirements for Virtual_Ecommerce_Design
+### Functional Requirements for AR_VR_Ecommerce
 
 1. Category Selection:
         The system shall allow the user to select a product category (e.g., Clothing, Accessories) through the console.
