@@ -1,0 +1,113 @@
+def display_categories():
+    categories = {
+        1: "Clothing",
+        2: "Accessories"
+    }
+    print("Please select a category:")
+    for key, value in categories.items():
+        print(f"{key}. {value}")
+    return categories
+
+
+def display_items(category):
+    items = {
+        "Clothing": {
+            1: "T-shirt",
+            2: "Jacket",
+            3: "Pants"
+        },
+        "Accessories": {
+            1: "Watch",
+            2: "Hat",
+            3: "Sunglasses"
+        }
+    }
+    print(f"\nYou selected {category}. Please choose an item:")
+    for key, value in items[category].items():
+        print(f"{key}. {value}")
+    return items[category]
+
+
+def get_user_size():
+    height = int(input("\nEnter your height (cm): "))
+    weight = int(input("Enter your weight (kg): "))
+    chest = int(input("Enter your chest measurement (cm): "))
+
+    # Validation can be added here
+    if height < 100 or height > 250:
+        print("Invalid height. Please enter a value between 100 and 250 cm.")
+        return get_user_size()
+    if weight < 30 or weight > 200:
+        print("Invalid weight. Please enter a value between 30 and 200 kg.")
+        return get_user_size()
+    if chest < 60 or chest > 150:
+        print("Invalid chest measurement. Please enter a value between 60 and 150 cm.")
+        return get_user_size()
+
+    return {"height": height, "weight": weight, "chest": chest}
+
+
+def virtual_try_on(item, size_info):
+    print(f"\n[AR Simulation] Visualizing the {item} on your avatar...")
+    # Simulated AR output based on user input
+    recommended_size = "Medium" if size_info["chest"] < 100 else "Large"
+    print(f"Based on your inputs, the best size for you is {recommended_size}.")
+    return recommended_size
+
+
+def explore_similar_products(item, size):
+    similar_items = {
+        "Jacket": [
+            "Leather Jacket - Medium",
+            "Denim Jacket - Medium",
+            "Windbreaker - Medium"
+        ],
+        "T-shirt": [
+            "Polo T-shirt - Medium",
+            "Graphic T-shirt - Medium",
+            "V-neck T-shirt - Medium"
+        ]
+    }
+    print("\nListing similar products:")
+    for idx, product in enumerate(similar_items[item], start=1):
+        print(f"{idx}. {product}")
+    return similar_items[item]
+
+
+def e_commerce_integration(selected_product):
+    print(f"\nYou selected {selected_product}. To proceed with purchasing, follow this link: [Mock E-commerce Link]")
+    print("Thank you for using the AR Shopping Experience!")
+
+
+def main():
+    categories = display_categories()
+    category_choice = int(input("> "))
+
+    if category_choice in categories:
+        selected_category = categories[category_choice]
+        items = display_items(selected_category)
+        item_choice = int(input("> "))
+
+        if item_choice in items:
+            selected_item = items[item_choice]
+            size_info = get_user_size()
+            virtual_try_on(selected_item, size_info)
+            explore_choice = input("\nWould you like to explore similar products? (yes/no) > ").lower()
+
+            if explore_choice == "yes":
+                similar_products = explore_similar_products(selected_item, size_info)
+                product_choice = int(input("\nSelect a product to purchase > "))
+
+                if 1 <= product_choice <= len(similar_products):
+                    e_commerce_integration(similar_products[product_choice - 1])
+                else:
+                    print("Invalid selection.")
+            else:
+                print("Exiting without exploring similar products.")
+        else:
+            print("Invalid item selection.")
+    else:
+        print("Invalid category selection.")
+
+
+if __name__ == "__main__":main()
